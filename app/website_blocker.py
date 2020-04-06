@@ -24,14 +24,27 @@ while True:
     if start_time < dt.now() < finish_time:
         print('Working hours...')
         # access the content file
-        with open(hosts_temp,'r+') as file:
+        with open(hosts_temp,'r+') as file: # 'r+' means read and append something in the file
             # read the content file
             content = file.read()
             for website in website_list:
+                # checking if the website are in the host file
                 if website in content:
                     pass
                 else:
-                    file.write(redirect+' '+website+'\n')
+                    # write the websites in the host file
+                    file.write('\n'+redirect+' '+website+'\n')
     else:
+        # access the content file
+        with open(hosts_temp,'r+') as file: # 'r+' means read and append something in the file
+            # read the content of lines in within the file
+            content = file.readlines()
+            # seek() will put the cursor on the o position of the first line
+            file.seek(0)
+            for line in content:
+                if not any(website in line for website in website_list):
+                    file.write(line)
+            # delete everthing that comes after the loop
+            file.truncate()
         print('Fun hours...')
     time.sleep(5)
