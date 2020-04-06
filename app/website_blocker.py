@@ -1,17 +1,17 @@
 import time
 from datetime import datetime as dt
 
-# path to access the hosts file on windows
-# hosts_path = r'C;\Windows\System32\drivers\etc
+# path to access the hosts file on windows(uncomment the line below if your are on windows)
+# hosts_path = r'C;\Windows\System32\drivers\etc\hosts'
 
-# path to access the hosts file on linux
-hosts_path = r'/etc/hosts'
+# path to access the hosts file on linux(comment the line below if you are on windows)
+hosts_path = '/etc/hosts'
 
 # redirect at localhost
 redirect = '127.0.0.1'
 
 # temp host file path
-hosts_temp = r'/media/root/5090E5C090E5ACA2/Users/CHRIS/Documents/ten project/website-blocker/app/hosts'
+hosts_temp = r'hosts'
 
 #  website list to block the access to internet
 website_list = ['www.facebook.com', 'facebook.com', 'www.instagram.com', 'instgram.com']
@@ -24,7 +24,7 @@ while True:
     if start_time < dt.now() < finish_time:
         print('Working hours...')
         # access the content file
-        with open(hosts_temp,'r+') as file: # 'r+' means read and append something in the file
+        with open(hosts_path,'r+') as file: # 'r+' means read and append something in the file
             # read the content file
             content = file.read()
             for website in website_list:
@@ -36,7 +36,7 @@ while True:
                     file.write('\n'+redirect+' '+website+'\n')
     else:
         # access the content file
-        with open(hosts_temp,'r+') as file: # 'r+' means read and append something in the file
+        with open(hosts_path,'r+') as file: # 'r+' means read and append something in the file
             # read the content of lines in within the file
             content = file.readlines()
             # seek() will put the cursor on the o position of the first line
